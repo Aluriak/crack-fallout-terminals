@@ -1,3 +1,88 @@
+# Crack Fallout Terminal
+Optical Character Recognition and game theory to help humans break
+the hundreds year old Robco Industries securities.
+
+
+## Motivation
+I like this puzzle a lot, but now i solved it hundreds of time,
+i figure i could make my computer do the work for me now.
+
+## Rationale
+Seing a computer working is a great pleasure in itself.
+With this project, i plan to see my computer working
+to solve problems given by other (fictional) computers.
+
+What a time to be alive.
+
+
+
+# Fun part: Game theory
+The Robco Industries securities consists in a game described as such:
+
+> A set of words of constant size appears on screen.
+> One of them, chosen secretly by the computer, is the *key*.
+> Four times, the user can select one word. The computer will then let the user
+> know how many letters are in good position.
+> If the user select the *key*, he win. If he fails four times, he loose.
+
+As an example, selecting «BANNING» when the key is «BRAKING»
+will give you a score of 4. Only the key can give you the maximal score,
+which is synonymous to winning.
+
+Such puzzle is quite easy when you take time, and can be really hard with either
+a lot of close words, or long ones.
+
+## Player behaviors
+A *player* here is a strategy. Many can exists, and in order to get a sens
+of what we can achieve, let's describe them, and compare them accross millions
+of randomly generated games.
+
+## Strategies
+### Random
+### Valid candidates
+### Best shots
+
+## Graphics
+
+## Criticisms
+Are the randomly generated instances *really* close to those generated
+by the real game ?
+
+
+# Glue part: the (¬) interface
+Because i'm playing on linux with a very *handcrafted* environment, i can't quit
+the game without making it crash.
+I however have two screens, and can take screenshots during the game,
+with a button that just copy the screen into a png file in my home directory.
+
+This is my running context for the overall program : it must print any result
+on my secondary screen, and should not require *any* input other from screenshots from my part.
+
+In a way, the interface is composed of only one button. Cool.
+
+
+## Watchdog
+[Watchdog](https://github.com/gorakhargosh/watchdog) is a wonderfull python script
+that can call back some routines when files are created in some directory.
+Files like png images taken by the user with the only allowed button.
+
+See [watcher](watcher.py) for implementation.
+
+## Communication protocol
+When i said there was only one button for interface, it seems horrible.
+But we have, in fact, much more to say, since the screenshot
+itself is informative.
+
+### Resetting
+### Following game state
+
+## Image interpretation
+
+
+
+# Hard part: OCR with tesseract
+In order to interpret the screenshots, we use [tesseract](https://pypi.org/project/pytesseract),
+which need some training before working on the ground.
 
 
 ## How-to: train tesseract
