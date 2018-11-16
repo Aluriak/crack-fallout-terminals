@@ -1,0 +1,25 @@
+
+
+
+### Font learning, part 1
+The font used seems to be [fixedsys](https://github.com/kika/fixedsys).
+
+To convert it from ttx to ttf, i used the python package [`fonttools`](https://github.com/fonttools/fonttools) and
+invoqued `ttx FSEX.ttx`, that got me `FSEX.ttf`, which i put in `~/.fonts` and then run `fc-cache -fv`:
+
+I used [this](http://ocr7.com) to get `Fixedsys.traineddata`, that was put in `/usr/share/tesseract/tessdata/`,
+in order to generate a first volley of data (the four experiments in `data/`).
+The file was then renamed `Fixedsys.traineddata.by-font`, and qt-box-editor
+was used to correct the four resulting box files.
+
+
+### qt-box-editor
+Compile on Fedora:
+
+    sudo dnf install qt5 qt5-qtsvg qt5-qtsvg-devel leptonica tesseract-devel
+    qmake-qt5
+    make
+
+
+### Font learning, part 2
+Let's build the final `Fixedsys.traineddata`.
