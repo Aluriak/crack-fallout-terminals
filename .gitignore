@@ -1,8 +1,9 @@
+*.tr
+Fixedsys.*
+Session.vim
 __pycache__/
 data/*.ttx
 qt-box-editor-1.12rc1
 qt-box-editor/
-venv/
-*.tr
-Fixedsys.*
 unicharset
+venv/
