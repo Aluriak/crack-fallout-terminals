@@ -96,14 +96,6 @@ def interpret_remaining_attempts(raw_text:str) -> [int]:
     return first_guess,  # both agree, or secnd_guess is lost
 
 
-def debug_print_images(images:dict):
-    for name, img in images.items():
-        print('\n\n' + '#' * 120)
-        print('IMAGE:', name)
-        img.save(f'real-data/{name}.png')
-        print(pytesseract.image_to_string(img, lang='Fixedsys'))
-
-
 def interpret(fname:str) -> dict:
     "Interpret image of given filename, return a dictionnary ready to be used."
     img = Image.open(fname)
@@ -131,5 +123,12 @@ if __name__ == '__main__':
     image = Image.open(imagefile)
     print('IMAGE:', imagefile)
     images = crop_standard_image(image)
+
+    for name, img in images.items():
+        print('\n\n' + '#' * 120)
+        print('IMAGE:', name)
+        img.save(f'real-data/{name}.png')
+        print(pytesseract.image_to_string(img, lang='Fixedsys'))
+
     for name, interpretation in interpret_images(images):
         print(name + ':', interpretation)
