@@ -5,3 +5,4 @@ qt-box-editor/
 venv/
 *.tr
 Fixedsys.*
+unicharset
