@@ -1,9 +1,11 @@
+TESSDIR=/usr/share/tesseract/tessdata/
+# TESSDIR=/usr/share/tessdata/
 
 
 # combine all to build the Fixedsys.traineddata
 Fixedsys.traineddata: clear train-from-box-files unicharset mftraining
 	combine_tessdata Fixedsys.
-	sudo cp Fixedsys.traineddata /usr/share/tesseract/tessdata/
+	sudo cp Fixedsys.traineddata $(TESSDIR)
 
 
 # once the generated box files have been corrected by hand, tell tesseract to learn from it.
@@ -38,7 +40,7 @@ make-box-files:
 
 
 use-basic-font-handling:
-	sudo cp Fixedsys.traineddata.by-font /usr/share/tesseract/tessdata/Fixedsys.traineddata
+	sudo cp Fixedsys.traineddata.by-font $(TESSDIR)Fixedsys.traineddata
 
 
 clear:
