@@ -1,8 +1,12 @@
 
 
+## How-to: train tesseract
+I followed [this tutorial](https://michaeljaylissner.com/posts/2012/02/11/adding-new-fonts-to-tesseract-3-ocr-engine),
+and a little of [this one](http://pretius.com/how-to-prepare-training-files-for-tesseract-ocr-and-improve-characters-recognition/).
+
 
 ### Font learning, part 1
-The font used seems to be [fixedsys](https://github.com/kika/fixedsys).
+The font used seems to be [fixedsys](https://github.com/kika/fixedsys), according to random internet strangers.
 
 To convert it from ttx to ttf, i used the python package [`fonttools`](https://github.com/fonttools/fonttools) and
 invoqued `ttx FSEX.ttx`, that got me `FSEX.ttf`, which i put in `~/.fonts` and then run `fc-cache -fv`:
@@ -23,3 +27,7 @@ Compile on Fedora:
 
 ### Font learning, part 2
 Let's build the final `Fixedsys.traineddata`.
+
+The commands can be found in [data/Makefile](data/Makefile).
+
+Then [poc.py](poc.py) can be run, to see how bad the text detection is.
