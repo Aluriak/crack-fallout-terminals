@@ -12,6 +12,7 @@ train-from-box-files:
 	tesseract eng.Fixedsys.exp1.png eng.Fixedsys.exp1.box nobatch box.train .stderr
 	tesseract eng.Fixedsys.exp2.png eng.Fixedsys.exp2.box nobatch box.train .stderr
 	tesseract eng.Fixedsys.exp3.png eng.Fixedsys.exp3.box nobatch box.train .stderr
+	tesseract eng.Fixedsys.exp4.png eng.Fixedsys.exp4.box nobatch box.train .stderr
 unicharset:
 	unicharset_extractor *.box
 mftraining:
