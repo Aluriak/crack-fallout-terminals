@@ -20,21 +20,19 @@ class PNGhandler(FileSystemEventHandler):
             self.callback(fname)
 
 
-def run_watchdog(callback:callable):
+def run(callback:callable):
     """Blocking. Will call given callable when a new png file is detected"""
     target_dir = os.path.expanduser('~')
     observer = Observer()
     observer.schedule(PNGhandler(callback), target_dir)
     observer.start()
-    print(f'Listening to PNG files in {target_dir}…')
     try:
         while True:
             time.sleep(10)
     except KeyboardInterrupt:
         observer.stop()
     observer.join()
-    print(f'Finished!')
 
 
 if __name__ == '__main__':
-    run_watchdog(print)
+    run(print)

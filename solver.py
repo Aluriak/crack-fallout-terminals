@@ -67,13 +67,15 @@ def simulate_game(player:callable, words:[str], key:str, silent:bool=False):
 
 
 
-def compute_score(word:str, key:str) -> int:
+def compute_score(word:str, key:str, *, silent:bool=False) -> int:
     """Return the number of valid letters"""
-    assert len(word) == len(key)
+    if not silent and len(word) != len(key):
+        print(f"WARNING: word {word} was scored based on key {key}, which is not the same size ({len(word)} vs {len(key)}).")
+        # assert len(word) == len(key)
     return sum(1 for ca, cb in zip(word, key) if ca == cb)
 
 
-def valid_candidates(words:{str: int}, remaining_attempts:int) -> [str]:
+def valid_candidates(words:{str: int}, remaining_attempts:int, *, silent:bool=False) -> [str]:
     """Yield the words that can be tested.
     If only one is returned, it is the key.
     If none is returned, it is a bug.
@@ -88,14 +90,14 @@ def valid_candidates(words:{str: int}, remaining_attempts:int) -> [str]:
 
     for word in words:
         if word in scored_words: continue
-        if all(score == compute_score(word, scored_word)
+        if all(score == compute_score(word, scored_word, silent=True)
                for scored_word, score in scored_words.items()):
             # There is exactly as much common letters as the score.
             #  May be good to try.
             yield word
 
 
-def best_candidates(words:{str: int}, remaining_attempts:int) -> [str]:
+def best_candidates(words:{str: int}, remaining_attempts:int, *, silent:bool=False) -> [str]:
     """Yield the words that can should tested (among the words than can be).
     If only one is returned, it is the key.
     If none is returned, it is a bug.
@@ -103,7 +105,7 @@ def best_candidates(words:{str: int}, remaining_attempts:int) -> [str]:
     words -- mapping from candidate word to its score, or None if not known.
 
     """
-    candidates = tuple(valid_candidates(words, remaining_attempts))
+    candidates = tuple(valid_candidates(words, remaining_attempts, silent=silent))
     print('#candidates:', len(candidates))
     print(' candidates:', ', '.join(candidates))
     if len(candidates) <= 1:  # the last candidate is your best shot
@@ -111,7 +113,8 @@ def best_candidates(words:{str: int}, remaining_attempts:int) -> [str]:
         return
     # for each position, count the available letters
     position_distributions = map(Counter, zip(*candidates))
-    print('DISTRIBUTIONS:', tuple(position_distributions))
+    if not silent:
+        print('DISTRIBUTIONS:', tuple(position_distributions))
     # TODO: ALT: get the word that would discard the most other words if found invalid.
 
     # while nothing is implemented…
