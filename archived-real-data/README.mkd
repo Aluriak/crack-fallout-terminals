@@ -1,0 +1,2 @@
+All treated screenshots are here, for reference in case of bug.
+They can be deleted safely.
