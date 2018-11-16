@@ -20,24 +20,36 @@ from collections import Counter
 MAX_ATTEMPTS = 4
 
 
-def simulate_game(player:callable, word_size:int=8, min_words:int=7, max_words:int=15):
-    """Simulate a game with words of given size.
+def create_game_data(word_size:int=8, min_words:int=7, max_words:int=15) -> ([str], str):
+    words = tuple(words_of_size(word_size))
+    chosen_words = {w: None for w in choose(random.randint(min_words, max_words), words)}
+    return chosen_words, next(choose(1, chosen_words.keys()))
 
-    Return the number of attempts made before finding it, or 0 if not found.
+
+def simulate_game_silently(*args, **kwargs):
+    return simulate_game(*args, **kwargs, silent=True)
+
+def simulate_game(player:callable, words:[str], key:str, silent:bool=False):
+    """Simulate a game with given words and key, and given player.
+
+    Return the number of attempts made before solving it, or 0 if not found.
 
     """
-    words = tuple(words_of_size(word_size))
-    words = {w: None for w in choose(random.randint(min_words, max_words), words, len(words))}
-    key = next(iter(choose(1, words.keys(), len(words))))
-    def print_words():
-        print('WORDS:')
-        for word, score in words.items():
-            print('\t' + word + (f' [{score}]' if score else ''))
+    assert key in words
+    if silent:
+        locals()['print'] = lambda *_, **__: ...
+        print_words = lambda: ...
+    else:
+        def print_words():
+            print(f'WORDS:')
+            for word, score in words.items():
+                print('\t' + word + (f' [{score}]' if score else ' '*5))
+                # print('\t' + word + (f' [{score}]' if score else ' '*5) + (f' [KEY]' if key == word else ''))
 
     remaining_attempts = MAX_ATTEMPTS
     while remaining_attempts > 0:
-        tested_word = next(player(words, remaining_attempts))
         print_words()
+        tested_word = next(player(words, remaining_attempts))
         print('Word tested >', tested_word)
         words[tested_word] = compute_score(tested_word, key)
         if tested_word == key:
@@ -106,5 +118,8 @@ def best_candidates(words:{str: int}, remaining_attempts:int) -> [str]:
     yield from candidates
 
 
+PLAYERS = valid_candidates, best_candidates
+
+
 if __name__ == '__main__':
-    simulate_game(player=best_candidates)
+    simulate_game(best_candidates, *create_game_data())

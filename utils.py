@@ -32,7 +32,7 @@ def words_of_size(size:int) -> [str]:
 
 
 def choose(nb_choosable:int, it:iter, it_size=None, random=random.random):
-    """Return a subset of iterable it, with a cardinal of n.
+    """Yield elements of a subset of iterable it, with a cardinal of n.
 
     Is performed in a O(|it|). For each element, the probability to found it
     in the output subset is equal to:
@@ -46,7 +46,6 @@ def choose(nb_choosable:int, it:iter, it_size=None, random=random.random):
 
     """
     # parameters treatment
-    choosens = set()  # set of the nb_choosen elements of it
     nb_elem = len(it) if it_size is None else it_size
     it = iter(it)
     assert nb_choosable <= nb_elem
@@ -56,9 +55,8 @@ def choose(nb_choosable:int, it:iter, it_size=None, random=random.random):
                                              # inclusion in the choosens set
         assert 0 <= likelihood <= 1.
         if random() <= likelihood:
-            choosens.add(elem)
+            yield elem
             nb_choosable -= 1
         nb_elem -= 1
         if nb_choosable == 0:  # no more element to choose
             break
-    return choosens
