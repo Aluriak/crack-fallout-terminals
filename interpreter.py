@@ -4,6 +4,7 @@ some computations to get an idea of the game state.
 """
 
 import re
+import glob
 from PIL import Image
 import pytesseract
 
