@@ -16,6 +16,12 @@ train-from-box-files:
 	tesseract eng.Fixedsys.exp3.png eng.Fixedsys.exp3.box nobatch box.train .stderr
 	tesseract eng.Fixedsys.exp4.png eng.Fixedsys.exp4.box nobatch box.train .stderr
 	tesseract eng.Fixedsys.exp5.png eng.Fixedsys.exp5.box nobatch box.train .stderr
+	tesseract eng.Fixedsys.exp6.png eng.Fixedsys.exp6.box nobatch box.train .stderr
+	tesseract eng.Fixedsys.exp7.png eng.Fixedsys.exp7.box nobatch box.train .stderr
+	tesseract eng.Fixedsys.exp8.png eng.Fixedsys.exp8.box nobatch box.train .stderr
+	tesseract eng.Fixedsys.exp9.png eng.Fixedsys.exp9.box nobatch box.train .stderr
+	tesseract eng.Fixedsys.exp10.png eng.Fixedsys.exp10.box nobatch box.train .stderr
+	tesseract eng.Fixedsys.exp11.png eng.Fixedsys.exp11.box nobatch box.train .stderr
 unicharset:
 	unicharset_extractor *.box
 mftraining:
@@ -37,6 +43,12 @@ make-box-files:
 	# tesseract eng.Fixedsys.exp3.png eng.Fixedsys.exp3 batch.nochop makebox
 	# tesseract eng.Fixedsys.exp4.png eng.Fixedsys.exp4 batch.nochop makebox
 	# tesseract eng.Fixedsys.exp5.png eng.Fixedsys.exp5 batch.nochop makebox
+	# tesseract eng.Fixedsys.exp6.png eng.Fixedsys.exp6 batch.nochop makebox
+	# tesseract eng.Fixedsys.exp7.png eng.Fixedsys.exp7 batch.nochop makebox
+	# tesseract eng.Fixedsys.exp8.png eng.Fixedsys.exp8 batch.nochop makebox
+	# tesseract eng.Fixedsys.exp9.png eng.Fixedsys.exp9 batch.nochop makebox
+	# tesseract eng.Fixedsys.exp10.png eng.Fixedsys.exp10 batch.nochop makebox
+	# tesseract eng.Fixedsys.exp11.png eng.Fixedsys.exp11 batch.nochop makebox
 
 
 use-basic-font-handling:
