@@ -128,7 +128,7 @@ if __name__ == '__main__':
     for name, img in images.items():
         print('\n\n' + '#' * 120)
         print('IMAGE:', name)
-        img.save(f'real-data/{name}.png')
+        img.save(f'real-data/temp/{name}.png')
         print(pytesseract.image_to_string(img, lang='Fixedsys'))
 
     for name, interpretation in interpret_images(images):
